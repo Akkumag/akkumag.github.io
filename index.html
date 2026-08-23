@@ -46,6 +46,16 @@
   }
   .brand { font-family: var(--mono); color: var(--text-dim); font-size: 13px; letter-spacing: 0.5px; }
   .brand .dot { color: var(--ok); }
+  .hero-body { display: flex; align-items: flex-start; gap: 28px; }
+  .hero-text { min-width: 0; flex: 1; }
+  .avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent);
+    flex-shrink: 0;
+  }
   h1 { font-size: clamp(28px, 5vw, 42px); margin: 0 0 6px 0; font-weight: 700; }
   .role { color: var(--accent); font-weight: 600; font-size: 17px; margin-bottom: 18px; }
   .pitch { max-width: 640px; color: var(--text-dim); font-size: 16px; margin-bottom: 26px; }
@@ -156,6 +166,8 @@
     .metric-row { grid-template-columns: 1fr; gap: 16px; }
     .cta-row { gap: 8px; }
     .cta { flex: 1 1 calc(50% - 8px); text-align: center; }
+    .hero-body { flex-direction: column; align-items: center; text-align: center; gap: 16px; }
+    .cta-row { justify-content: center; }
   }
 
   /* Belt-and-suspenders: nothing should ever force horizontal scroll on the page itself */
@@ -172,17 +184,22 @@
     <div class="hero-top">
       <div class="brand"><span class="dot">●</span> status: open to work</div>
     </div>
-    <h1>Akku Magziyeva</h1>
-    <div class="role">DevOps Engineer · Platform Engineer</div>
-    <p class="pitch">
-      <strong>I turn complex infrastructure into simple, reliable, self-service systems.</strong>
-      DevOps/platform engineer with 5 years of experience building internal developer platforms — self-service infrastructure on Kubernetes and Terraform, with CI/CD automation, for an engineering org of 1,000+ people.
-    </p>
-    <div class="cta-row">
-      <a class="cta primary" href="assets/Akku_Magziyeva_Resume.pdf">Résumé (PDF)</a>
-      <a class="cta" href="https://linkedin.com/in/akku-magziyeva">LinkedIn</a>
-      <a class="cta" href="https://github.com/Akkumag">GitHub</a>
-      <a class="cta" href="mailto:akku_rafael@icloud.com">Contact</a>
+    <div class="hero-body">
+      <img class="avatar" src="assets/avatar.jpg" alt="Akku Magziyeva">
+      <div class="hero-text">
+        <h1>Akku Magziyeva</h1>
+        <div class="role">DevOps Engineer · Platform Engineer</div>
+        <p class="pitch">
+          <strong>I turn complex infrastructure into simple, reliable, self-service systems.</strong>
+          DevOps/platform engineer with 5 years of experience building internal developer platforms — self-service infrastructure on Kubernetes and Terraform, with CI/CD automation, for an engineering org of 1,000+ people.
+        </p>
+        <div class="cta-row">
+          <a class="cta primary" href="assets/Akku_Magziyeva_Resume.pdf">Résumé (PDF)</a>
+          <a class="cta" href="https://linkedin.com/in/akku-magziyeva">LinkedIn</a>
+          <a class="cta" href="https://github.com/Akkumag">GitHub</a>
+          <a class="cta" href="mailto:akku_rafael@icloud.com">Contact</a>
+        </div>
+      </div>
     </div>
   </div>
 </header>
