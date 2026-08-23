@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Akku Magziyeva — DevOps / Platform Engineer</title>
+<meta name="description" content="DevOps/platform engineer — self-service infrastructure on Kubernetes and Terraform, for an engineering org of 1,000+ people.">
+<style>
+  :root {
+    --bg: #0d1117;
+    --panel: #12181f;
+    --panel-border: #26303c;
+    --text: #e6edf3;
+    --text-dim: #8b98a5;
+    --accent: #f2a54a;
+    --accent-dim: #a97a3d;
+    --ok: #4ade80;
+    --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.5;
+    overflow-wrap: break-word;
+  }
+  a { color: var(--accent); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+  /* Hero */
+  header.hero {
+    padding: 56px 0 40px 0;
+    border-bottom: 1px solid var(--panel-border);
+  }
+  .hero-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .brand { font-family: var(--mono); color: var(--text-dim); font-size: 13px; letter-spacing: 0.5px; }
+  .brand .dot { color: var(--ok); }
+  h1 { font-size: clamp(28px, 5vw, 42px); margin: 0 0 6px 0; font-weight: 700; }
+  .role { color: var(--accent); font-weight: 600; font-size: 17px; margin-bottom: 18px; }
+  .pitch { max-width: 640px; color: var(--text-dim); font-size: 16px; margin-bottom: 26px; }
+  .pitch strong { color: var(--text); }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 10px; }
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    border: 1px solid var(--panel-border);
+    color: var(--text);
+    min-width: 0;
+    white-space: nowrap;
+  }
+  .cta.primary { background: var(--accent); color: #1a1204; border-color: var(--accent); }
+  .cta:not(.primary):hover { border-color: var(--accent-dim); }
+
+  /* Dashboard grid */
+  main { padding: 40px 0 60px 0; }
+  .grid-label {
+    font-family: var(--mono);
+    color: var(--text-dim);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 14px 0;
+  }
+  .dashboard {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .panel {
+    min-width: 0;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 8px;
+    padding: 18px 20px;
+  }
+  .panel h2 {
+    font-family: var(--mono);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-dim);
+    margin: 0 0 14px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .panel h2::before { content: "●"; color: var(--ok); font-size: 9px; }
+
+  /* Impact metrics panel */
+  .panel-metrics { grid-column: span 12; }
+  .metric-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; }
+  .metric { min-width: 0; }
+  .metric { border-left: 2px solid var(--accent); padding-left: 14px; }
+  .metric .num { font-family: var(--mono); font-size: 28px; font-weight: 700; color: var(--accent); line-height: 1.1; }
+  .metric .label { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+  .metric .foot { font-size: 12px; color: var(--text-dim); margin-top: 6px; line-height: 1.4; }
+
+  /* Experience panel */
+  .panel-exp { grid-column: span 7; }
+  .role-item { margin-bottom: 16px; }
+  .role-item:last-child { margin-bottom: 0; }
+  .role-item .r-title { font-weight: 700; font-size: 15px; }
+  .role-item .r-meta { font-size: 13px; color: var(--text-dim); font-style: italic; margin-bottom: 6px; }
+  .role-item ul { margin: 4px 0 0 0; padding-left: 18px; font-size: 14px; color: var(--text); }
+  .role-item li { margin-bottom: 4px; }
+
+  /* Skills panel */
+  .panel-skills { grid-column: span 5; }
+  .skill-row { margin-bottom: 10px; font-size: 14px; }
+  .skill-row .cat { font-family: var(--mono); font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 3px; }
+
+  /* Projects panel */
+  .panel-projects { grid-column: span 8; }
+  .project-item { margin-bottom: 16px; }
+  .project-item:last-child { margin-bottom: 0; }
+  .project-item .p-title { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+  .project-item .p-title a { color: var(--text); text-decoration: none; border-bottom: 1px dotted var(--text-dim); }
+  .project-item .p-desc { font-size: 14px; color: var(--text-dim); }
+
+  /* Cert panel */
+  .panel-cert { grid-column: span 4; display: flex; flex-direction: column; justify-content: center; }
+  .cert-badge { font-family: var(--mono); font-size: 20px; font-weight: 700; color: var(--ok); }
+  .cert-name { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+  /* Build note */
+  .panel-build { grid-column: span 12; }
+  .panel-build p { font-size: 14px; color: var(--text-dim); margin: 0 0 10px 0; }
+  .panel-build p:last-child { margin-bottom: 0; }
+  .panel-build code { font-family: var(--mono); background: #1c232b; padding: 2px 6px; border-radius: 4px; color: var(--accent); font-size: 13px; }
+
+  footer { border-top: 1px solid var(--panel-border); padding: 24px 0; text-align: center; color: var(--text-dim); font-size: 13px; font-family: var(--mono); }
+
+  /* Mobile: single column, per panel-review feedback */
+  @media (max-width: 720px) {
+    .panel-exp, .panel-skills, .panel-projects, .panel-cert, .panel-metrics, .panel-build {
+      grid-column: span 12;
+    }
+    header.hero { padding: 40px 0 28px 0; }
+    .metric-row { grid-template-columns: 1fr; gap: 16px; }
+    .cta-row { gap: 8px; }
+    .cta { flex: 1 1 calc(50% - 8px); text-align: center; }
+  }
+
+  /* Belt-and-suspenders: nothing should ever force horizontal scroll on the page itself */
+  html, body { max-width: 100%; overflow-x: hidden; }
+  img, pre, code { max-width: 100%; }
+
+  /* Fallback: if CSS grid is unsupported, panels still stack top-to-bottom in source order — no JS required for content to render at all. */
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <div class="brand"><span class="dot">●</span> status: open to work</div>
+    </div>
+    <h1>Akku Magziyeva</h1>
+    <div class="role">DevOps Engineer · Platform Engineer</div>
+    <p class="pitch">
+      <strong>I turn complex infrastructure into simple, reliable, self-service systems.</strong>
+      DevOps/platform engineer with 5 years of experience building internal developer platforms — self-service infrastructure on Kubernetes and Terraform, with CI/CD automation, for an engineering org of 1,000+ people.
+    </p>
+    <div class="cta-row">
+      <a class="cta primary" href="assets/Akku_Magziyeva_Resume.pdf">Résumé (PDF)</a>
+      <a class="cta" href="https://linkedin.com/in/akku-magziyeva">LinkedIn</a>
+      <a class="cta" href="https://github.com/Akkumag">GitHub</a>
+      <a class="cta" href="mailto:akku_rafael@icloud.com">Contact</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="grid-label">// mission control</p>
+  <div class="dashboard">
+
+    <section class="panel panel-metrics">
+      <h2>Impact metrics</h2>
+      <div class="metric-row">
+        <div class="metric">
+          <div class="num">1,000+</div>
+          <div class="label">engineers on the platform</div>
+          <div class="foot">The org whose developers provision infrastructure through the self-service Terraform/CLI tooling she built.</div>
+        </div>
+        <div class="metric">
+          <div class="num">300%+</div>
+          <div class="label">platform adoption growth</div>
+          <div class="foot">Internal team metric (HelloFresh's Tardis data platform) — a team-level result her self-service tooling contributed to, not a solo claim.</div>
+        </div>
+        <div class="metric">
+          <div class="num">650%+</div>
+          <div class="label">growth in managed data assets</div>
+          <div class="foot">Same internal metric set as adoption growth — datasets/pipelines the platform now manages.</div>
+        </div>
+        <div class="metric">
+          <div class="num">weeks → days</div>
+          <div class="label">data-onboarding setup time</div>
+          <div class="foot">Before: manual Kafka connector/stream-processor/S3/schema setup, coordinated with the data team. After: a single PR through the self-service tooling.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel panel-exp">
+      <h2>Experience</h2>
+      <div class="role-item">
+        <div class="r-title">Platform Engineer</div>
+        <div class="r-meta">HelloFresh — Foundations (internal data-platform team) · Remote · Nov 2023 — Present</div>
+        <ul>
+          <li>Built self-service Terraform/CLI tooling for Tardis, HelloFresh's internal data platform.</li>
+          <li>Owns versioning and release safety for the Terraform module — validation, tests, staged rollouts.</li>
+          <li>Runs the Kubernetes/Docker infrastructure behind the platform's Kafka and RabbitMQ messaging layer.</li>
+        </ul>
+      </div>
+      <div class="role-item">
+        <div class="r-title">Platform Engineer</div>
+        <div class="r-meta">GumGum — AI-powered contextual ad-tech · Remote · Sep 2021 — Oct 2023</div>
+        <ul>
+          <li>Contributed to a reusable Terraform EKS module — configurable node-group and IAM resources/variables.</li>
+          <li>Worked hands-on with AWS, Kubernetes/EKS, Docker, and Terraform on a cloud-native platform team.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel panel-skills">
+      <h2>Skills</h2>
+      <div class="skill-row"><span class="cat">Cloud &amp; Infra</span>AWS (IAM, EC2, VPC, S3, EKS), Linux, Docker, Kubernetes</div>
+      <div class="skill-row"><span class="cat">IaC &amp; Automation</span>Terraform, GitHub Actions</div>
+      <div class="skill-row"><span class="cat">Messaging</span>Kafka, RabbitMQ</div>
+      <div class="skill-row"><span class="cat">AI/Agentic</span>Claude Code, internal AI PR-review tooling, plan-mode workflows, diff review discipline</div>
+      <div class="skill-row"><span class="cat">Databases</span>PostgreSQL</div>
+      <div class="skill-row"><span class="cat">Scripting</span>Bash, Python</div>
+    </section>
+
+    <section class="panel panel-projects">
+      <h2>Projects</h2>
+      <div class="project-item">
+        <div class="p-title">Serverless Memo App</div>
+        <div class="p-desc">A serverless notes app built solo end to end — Cognito, API Gateway, Lambda, DynamoDB, CloudFront — provisioned with Terraform and deployed through a GitHub Actions pipeline using OIDC (no long-lived AWS keys). Authorization is enforced at API Gateway, before compute ever runs.</div>
+      </div>
+      <div class="project-item">
+        <div class="p-title">Tardis self-service platform (HelloFresh)</div>
+        <div class="p-desc">The Terraform module and CLI behind HelloFresh's internal data platform — abstracts Terraform, IAM, and permissions so developer teams provision infrastructure themselves. Found and fixed a backward-compatibility break in the module with a versioned rollout and zero service disruption for the teams already depending on it.</div>
+      </div>
+    </section>
+
+    <section class="panel panel-cert">
+      <h2>Certification</h2>
+      <div class="cert-badge">CKAD</div>
+      <div class="cert-name">Certified Kubernetes Application Developer</div>
+    </section>
+
+    <section class="panel panel-build">
+      <h2>How this site was built</h2>
+      <p>Built with Claude Code, using the same workflow described in the Experience panel: I set the plan (structure, content, style direction) and reviewed it before anything was written; the page was implemented against that plan; I reviewed the actual diff and the rendered result before treating anything as done.</p>
+      <p>Deliberately simple: plain HTML/CSS, no build step, no JavaScript dependency for content — the dashboard panels render directly from HTML, so there's no "script failed to load" failure mode. Hosted on <code>GitHub Pages</code>, source at <a href="https://github.com/Akkumag/akkumag.github.io">github.com/Akkumag/akkumag.github.io</a>.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  akkumag.github.io · built and deployed via GitHub Pages
+</footer>
+
+</body>
+</html>
