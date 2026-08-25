@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Akku Magziyeva — DevOps / Platform Engineer</title>
-<meta name="description" content="DevOps/platform engineer — self-service infrastructure on Kubernetes and Terraform, for an engineering org of 1,000+ people.">
+<meta name="description" content="DevOps/platform engineer — self-service infrastructure on Kubernetes and Terraform, with CI/CD automation.">
 <style>
   :root {
     --bg: #0d1117;
@@ -191,7 +191,7 @@
         <div class="role">DevOps Engineer · Platform Engineer</div>
         <p class="pitch">
           <strong>I turn complex infrastructure into simple, reliable, self-service systems.</strong>
-          DevOps/platform engineer with 5 years of experience building internal developer platforms — self-service infrastructure on Kubernetes and Terraform, with CI/CD automation, for an engineering org of 1,000+ people.
+          DevOps/platform engineer with 5 years of experience building internal developer platforms — self-service infrastructure on Kubernetes and Terraform, with CI/CD automation.
         </p>
         <div class="cta-row">
           <a class="cta primary" href="assets/Akku_Magziyeva_Resume.pdf">Résumé (PDF)</a>
@@ -217,16 +217,6 @@
           <div class="foot">The org whose developers provision infrastructure through the self-service Terraform/CLI tooling she built.</div>
         </div>
         <div class="metric">
-          <div class="num">300%+</div>
-          <div class="label">platform adoption growth</div>
-          <div class="foot">Internal team metric (HelloFresh's Tardis data platform) — a team-level result her self-service tooling contributed to, not a solo claim.</div>
-        </div>
-        <div class="metric">
-          <div class="num">650%+</div>
-          <div class="label">growth in managed data assets</div>
-          <div class="foot">Same internal metric set as adoption growth — datasets/pipelines the platform now manages.</div>
-        </div>
-        <div class="metric">
           <div class="num">weeks → days</div>
           <div class="label">data-onboarding setup time</div>
           <div class="foot">Before: manual Kafka connector/stream-processor/S3/schema setup, coordinated with the data team. After: a single PR through the self-service tooling.</div>
@@ -240,7 +230,7 @@
         <div class="r-title">Platform Engineer</div>
         <div class="r-meta">HelloFresh — Foundations (internal data-platform team) · Remote · Nov 2023 — Present</div>
         <ul>
-          <li>Built self-service Terraform/CLI tooling for Tardis, HelloFresh's internal data platform.</li>
+          <li>Built self-service Terraform/CLI tooling for HelloFresh's internal data platform.</li>
           <li>Owns versioning and release safety for the Terraform module — validation, tests, staged rollouts.</li>
           <li>Runs the Kubernetes/Docker infrastructure behind the platform's Kafka and RabbitMQ messaging layer.</li>
         </ul>
@@ -260,8 +250,8 @@
       <div class="skill-row"><span class="cat">Cloud &amp; Infra</span>AWS (IAM, EC2, VPC, S3, EKS), Linux, Docker, Kubernetes</div>
       <div class="skill-row"><span class="cat">IaC &amp; Automation</span>Terraform, GitHub Actions</div>
       <div class="skill-row"><span class="cat">Messaging</span>Kafka, RabbitMQ</div>
+      <div class="skill-row"><span class="cat">Observability</span>CloudWatch, Prometheus, Grafana</div>
       <div class="skill-row"><span class="cat">AI/Agentic</span>Claude Code, internal AI PR-review tooling, plan-mode workflows, diff review discipline</div>
-      <div class="skill-row"><span class="cat">Databases</span>PostgreSQL</div>
       <div class="skill-row"><span class="cat">Scripting</span>Bash, Python</div>
     </section>
 
@@ -272,8 +262,8 @@
         <div class="p-desc">A serverless notes app built solo end to end — Cognito, API Gateway, Lambda, DynamoDB, CloudFront — provisioned with Terraform and deployed through a GitHub Actions pipeline using OIDC (no long-lived AWS keys). Authorization is enforced at API Gateway, before compute ever runs.</div>
       </div>
       <div class="project-item">
-        <div class="p-title">Tardis self-service platform (HelloFresh)</div>
-        <div class="p-desc">The Terraform module and CLI behind HelloFresh's internal data platform — abstracts Terraform, IAM, and permissions so developer teams provision infrastructure themselves. Found and fixed a backward-compatibility break in the module with a versioned rollout and zero service disruption for the teams already depending on it.</div>
+        <div class="p-title">Self-service data platform tooling (HelloFresh)</div>
+        <div class="p-desc">The Terraform module and CLI behind HelloFresh's internal data platform — abstracts Terraform, IAM, and permissions so developer teams provision infrastructure themselves. A version bump I shipped once silently changed a default IAM permission and broke another team's onboarding PR; I found it by diffing module versions and reproducing the failure in a scratch environment, patched it same-day, and added a CI gate that diffs IAM policy output between versions — it's caught two similar drifts since.</div>
       </div>
     </section>
 
