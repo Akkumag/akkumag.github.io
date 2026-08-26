@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Akku Magziyeva — DevOps / Platform Engineer</title>
-<meta name="description" content="DevOps/platform engineer — self-service infrastructure on Kubernetes and Terraform, with CI/CD automation.">
+<meta name="description" content="DevOps/platform engineer who owns infrastructure other people depend on — Terraform modules and CLI tooling that let engineering teams provision Kubernetes and AWS infrastructure themselves.">
+
 <style>
   :root {
     --bg: #0d1117;
@@ -191,7 +192,7 @@
         <div class="role">DevOps Engineer · Platform Engineer</div>
         <p class="pitch">
           <strong>I turn complex infrastructure into simple, reliable, self-service systems.</strong>
-          DevOps/platform engineer with 5 years of experience building internal developer platforms — self-service infrastructure on Kubernetes and Terraform, with CI/CD automation.
+          DevOps/platform engineer who owns infrastructure other people depend on — Terraform modules and CLI tooling that let engineering teams provision Kubernetes and AWS infrastructure themselves, with the versioning discipline to ship changes without breaking anyone already using it.
         </p>
         <div class="cta-row">
           <a class="cta primary" href="assets/Akku_Magziyeva_Resume.pdf">Résumé (PDF)</a>
@@ -230,16 +231,16 @@
         <div class="r-title">Platform Engineer</div>
         <div class="r-meta">HelloFresh via Loopin — Foundations (internal data-platform team) · Remote · Nov 2023 — Present</div>
         <ul>
-          <li>Built self-service Terraform/CLI tooling for HelloFresh's internal data platform.</li>
-          <li>Owns versioning and release safety for the Terraform module — validation, tests, staged rollouts.</li>
-          <li>Runs the Kubernetes/Docker infrastructure behind the platform's Kafka and RabbitMQ messaging layer.</li>
+          <li>Built self-service Terraform/CLI tooling for HelloFresh's internal data platform — cut data onboarding from weeks of manual Kafka/S3/schema setup to same-day.</li>
+          <li>Owns versioning and release safety for the Terraform module — validation, tests, staged rollouts — so infrastructure changes never break teams already depending on it.</li>
+          <li>Runs the Kubernetes/Docker infrastructure behind the platform's Kafka and RabbitMQ messaging layer, as part of the shift from a monolithic data platform to data mesh.</li>
         </ul>
       </div>
       <div class="role-item">
         <div class="r-title">Platform Engineer</div>
         <div class="r-meta">GumGum via Loopin — AI-powered contextual ad-tech · Remote · Sep 2021 — Oct 2023</div>
         <ul>
-          <li>Contributed to a reusable Terraform EKS module — configurable node-group and IAM resources/variables.</li>
+          <li>Contributed to a reusable Terraform EKS module — configurable node-group and IAM resources/variables — improved repeatability of cluster provisioning across environments.</li>
           <li>Diagnosed a cluster-autoscaler bottleneck during a traffic burst — pods queued because node-group scaling limits were too conservative — fixed it with a senior engineer and updated scaling defaults across other clusters on the same module.</li>
           <li>Worked hands-on with AWS, Kubernetes/EKS, Docker, and Terraform on a cloud-native platform team.</li>
         </ul>
@@ -252,12 +253,16 @@
       <div class="skill-row"><span class="cat">IaC &amp; Automation</span>Terraform, GitHub Actions</div>
       <div class="skill-row"><span class="cat">Messaging</span>Kafka, RabbitMQ</div>
       <div class="skill-row"><span class="cat">Observability</span>CloudWatch, Prometheus, Grafana</div>
-      <div class="skill-row"><span class="cat">AI/Agentic</span>Claude Code, internal AI PR-review tooling, plan-mode workflows, diff review discipline</div>
+      <div class="skill-row"><span class="cat">AI/Agentic</span>Claude Code (daily driver), internal AI PR-review tooling, plan-mode workflows, diff review discipline, context engineering (CLAUDE.md)</div>
       <div class="skill-row"><span class="cat">Scripting</span>Bash, Python</div>
     </section>
 
     <section class="panel panel-projects">
       <h2>Projects</h2>
+      <div class="project-item">
+        <div class="p-title">AI PR Review Agent — In Progress</div>
+        <div class="p-desc">Building a GitHub Actions-triggered automation pipeline that runs on every pull request, containerized with Docker and deployed on AWS. The review logic is in Python, integrating an LLM API for automated code-quality and infrastructure feedback with configurable rules per repo. Still in progress — no production users or metrics to claim yet.</div>
+      </div>
       <div class="project-item">
         <div class="p-title">Serverless Memo App</div>
         <div class="p-desc">A serverless notes app built solo end to end — Cognito, API Gateway, Lambda, DynamoDB, CloudFront — provisioned with Terraform and deployed through a GitHub Actions pipeline using OIDC (no long-lived AWS keys). Authorization is enforced at API Gateway, before compute ever runs.</div>
