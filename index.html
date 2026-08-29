@@ -232,7 +232,7 @@
         <div class="r-meta">HelloFresh via Loopin — Foundations (internal data-platform team) · Remote · Nov 2023 — Present</div>
         <ul>
           <li>Built self-service Terraform/CLI tooling for HelloFresh's internal data platform — cut data onboarding from weeks of manual Kafka/S3/schema setup to same-day.</li>
-          <li>Owns versioning and release safety for the Terraform module — validation, tests, staged rollouts — so infrastructure changes never break teams already depending on it.</li>
+          <li>Built a CI gate that diffs IAM policy across Terraform module versions — has caught 2 permission drifts before merge since a version bump silently broke a team's onboarding (patched same-day).</li>
           <li>Runs the Kubernetes/Docker infrastructure behind the platform's Kafka and RabbitMQ messaging layer, as part of the shift from a monolithic data platform to data mesh.</li>
         </ul>
       </div>
