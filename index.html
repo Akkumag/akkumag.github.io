@@ -8,14 +8,14 @@
 
 <style>
   :root {
-    --bg: #0d1117;
-    --panel: #12181f;
-    --panel-border: #26303c;
-    --text: #e6edf3;
-    --text-dim: #8b98a5;
-    --accent: #f2a54a;
-    --accent-dim: #a97a3d;
-    --ok: #4ade80;
+    --bg: #f7f2ea;
+    --bg-alt: #efe8da;
+    --card: #ffffff;
+    --text: #1c1a16;
+    --text-dim: #6b6558;
+    --accent: #0b5d4a;
+    --accent-soft: #dbe9e4;
+    --border: #e4dbc9;
     --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
@@ -30,228 +30,282 @@
     overflow-wrap: break-word;
   }
   a { color: var(--accent); }
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  html, body { max-width: 100%; overflow-x: hidden; }
+  img { max-width: 100%; }
+
+  /* Top bar */
+  .topbar { padding: 22px 0; }
+  .topbar .wrap { display: flex; justify-content: space-between; align-items: center; }
+  .status-pill {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--text-dim);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .status-pill .dot { width: 7px; height: 7px; border-radius: 50%; background: #3fa66b; display: inline-block; }
+  .topbar nav { display: flex; gap: 22px; font-size: 14px; }
+  .topbar nav a { color: var(--text); text-decoration: none; font-weight: 500; }
+  .topbar nav a:hover { color: var(--accent); }
 
   /* Hero */
-  header.hero {
-    padding: 56px 0 40px 0;
-    border-bottom: 1px solid var(--panel-border);
-  }
-  .hero-top {
-    display: flex;
-    justify-content: space-between;
+  header.hero { padding: 20px 0 0 0; }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 48px;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 28px;
+    padding: 24px 0 56px 0;
   }
-  .brand { font-family: var(--mono); color: var(--text-dim); font-size: 13px; letter-spacing: 0.5px; }
-  .brand .dot { color: var(--ok); }
-  .hero-body { display: flex; align-items: flex-start; gap: 28px; }
-  .hero-text { min-width: 0; flex: 1; }
-  .avatar {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid var(--accent);
-    flex-shrink: 0;
+  .hero-text h1 {
+    font-size: clamp(40px, 6vw, 64px);
+    line-height: 1.02;
+    margin: 0 0 6px 0;
+    font-weight: 800;
+    letter-spacing: -0.02em;
   }
-  h1 { font-size: clamp(28px, 5vw, 42px); margin: 0 0 6px 0; font-weight: 700; }
-  .role { color: var(--accent); font-weight: 600; font-size: 17px; margin-bottom: 18px; }
-  .pitch { max-width: 640px; color: var(--text-dim); font-size: 16px; margin-bottom: 26px; }
-  .pitch strong { color: var(--text); }
-  .cta-row { display: flex; flex-wrap: wrap; gap: 10px; }
+  .hero-text .role {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  .hero-text .pitch {
+    font-size: 18px;
+    color: var(--text-dim);
+    max-width: 480px;
+    margin-bottom: 30px;
+  }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
   .cta {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 10px 16px;
-    border-radius: 6px;
+    padding: 12px 20px;
+    border-radius: 999px;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 14.5px;
     font-weight: 600;
-    border: 1px solid var(--panel-border);
+    border: 1.5px solid var(--text);
     color: var(--text);
-    min-width: 0;
     white-space: nowrap;
   }
-  .cta.primary { background: var(--accent); color: #1a1204; border-color: var(--accent); }
-  .cta:not(.primary):hover { border-color: var(--accent-dim); }
+  .cta.primary { background: var(--text); color: var(--bg); }
+  .cta.primary:hover { background: var(--accent); border-color: var(--accent); }
+  .cta:not(.primary):hover { border-color: var(--accent); color: var(--accent); }
 
-  /* Dashboard grid */
-  main { padding: 40px 0 60px 0; }
-  .grid-label {
+  .hero-photo-wrap {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    background: var(--bg-alt);
+  }
+  .hero-photo-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* Marquee */
+  .marquee-section { border-top: 1.5px solid var(--text); border-bottom: 1.5px solid var(--text); background: var(--text); overflow: hidden; }
+  .marquee-track { display: flex; width: max-content; animation: scroll-left 32s linear infinite; }
+  .marquee-track span {
     font-family: var(--mono);
-    color: var(--text-dim);
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin: 0 0 14px 0;
+    font-size: 14.5px;
+    letter-spacing: 0.5px;
+    color: var(--bg);
+    padding: 16px 28px;
+    white-space: nowrap;
   }
-  .dashboard {
-    display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    gap: 16px;
+  .marquee-track span::after { content: "•"; margin-left: 28px; color: var(--accent); }
+  @keyframes scroll-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
-  .panel {
-    min-width: 0;
-    background: var(--panel);
-    border: 1px solid var(--panel-border);
-    border-radius: 8px;
-    padding: 18px 20px;
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; flex-wrap: wrap; width: 100%; justify-content: center; }
   }
-  .panel h2 {
+
+  /* Stats */
+  .stats-section { padding: 56px 0; }
+  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .stat .num { font-size: clamp(36px, 5vw, 52px); font-weight: 800; color: var(--accent); line-height: 1; letter-spacing: -0.01em; }
+  .stat .num a { color: inherit; text-decoration: none; border-bottom: 2px dotted var(--accent); }
+  .stat .label { margin-top: 10px; font-size: 15px; color: var(--text-dim); max-width: 220px; }
+
+  /* Section shell */
+  section.block { padding: 48px 0; border-top: 1px solid var(--border); }
+  .block h2 {
     font-family: var(--mono);
     font-size: 13px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     color: var(--text-dim);
-    margin: 0 0 14px 0;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    margin: 0 0 28px 0;
   }
-  .panel h2::before { content: "●"; color: var(--ok); font-size: 9px; }
 
-  /* Impact metrics panel */
-  .panel-metrics { grid-column: span 12; }
-  .metric-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; }
-  .metric { min-width: 0; }
-  .metric { border-left: 2px solid var(--accent); padding-left: 14px; }
-  .metric .num { font-family: var(--mono); font-size: 28px; font-weight: 700; color: var(--accent); line-height: 1.1; }
-  .metric .label { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
-  .metric .foot { font-size: 12px; color: var(--text-dim); margin-top: 6px; line-height: 1.4; }
-
-  /* Experience panel */
-  .panel-exp { grid-column: span 7; }
-  .role-item { margin-bottom: 16px; }
+  /* Experience */
+  .role-item { margin-bottom: 34px; }
   .role-item:last-child { margin-bottom: 0; }
-  .role-item .r-title { font-weight: 700; font-size: 15px; }
-  .role-item .r-meta { font-size: 13px; color: var(--text-dim); font-style: italic; margin-bottom: 6px; }
-  .role-item ul { margin: 4px 0 0 0; padding-left: 18px; font-size: 14px; color: var(--text); }
-  .role-item li { margin-bottom: 4px; }
+  .role-item .r-title { font-weight: 800; font-size: 20px; }
+  .role-item .r-meta { font-size: 14.5px; color: var(--text-dim); font-style: italic; margin: 2px 0; }
+  .role-item ul { margin: 10px 0 0 0; padding-left: 20px; font-size: 15.5px; }
+  .role-item li { margin-bottom: 7px; }
 
-  /* Skills panel */
-  .panel-skills { grid-column: span 5; }
-  .skill-row { margin-bottom: 10px; font-size: 14px; }
-  .skill-row .cat { font-family: var(--mono); font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 3px; }
-
-  /* Projects panel */
-  .panel-projects { grid-column: span 8; }
-  .project-item { margin-bottom: 16px; }
-  .project-item:last-child { margin-bottom: 0; }
-  .project-item .p-title { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
-  .project-item .p-title a { color: var(--text); text-decoration: none; border-bottom: 1px dotted var(--text-dim); }
-  .project-item .p-desc { font-size: 14px; color: var(--text-dim); }
-
-  /* Cert panel */
-  .panel-cert { grid-column: span 4; display: flex; flex-direction: column; justify-content: center; }
-  .cert-badge { font-family: var(--mono); font-size: 20px; font-weight: 700; color: var(--ok); }
-  .cert-name { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
-
-  /* Build note */
-  .panel-build { grid-column: span 12; }
-  .panel-build p { font-size: 14px; color: var(--text-dim); margin: 0 0 10px 0; }
-  .panel-build p:last-child { margin-bottom: 0; }
-  .panel-build code { font-family: var(--mono); background: #1c232b; padding: 2px 6px; border-radius: 4px; color: var(--accent); font-size: 13px; }
-
-  footer { border-top: 1px solid var(--panel-border); padding: 24px 0; text-align: center; color: var(--text-dim); font-size: 13px; font-family: var(--mono); }
-
-  /* Mobile: single column, per panel-review feedback */
-  @media (max-width: 720px) {
-    .panel-exp, .panel-skills, .panel-projects, .panel-cert, .panel-metrics, .panel-build {
-      grid-column: span 12;
-    }
-    header.hero { padding: 40px 0 28px 0; }
-    .metric-row { grid-template-columns: 1fr; gap: 16px; }
-    .cta-row { gap: 8px; }
-    .cta { flex: 1 1 calc(50% - 8px); text-align: center; }
-    .hero-body { flex-direction: column; align-items: center; text-align: center; gap: 16px; }
-    .cta-row { justify-content: center; }
+  /* Projects */
+  .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 24px;
+    scroll-margin-top: 24px;
   }
+  .project-card .p-title { font-weight: 800; font-size: 16.5px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+  .project-card .p-title a { color: var(--text); text-decoration: none; }
+  .project-card .p-title a:hover { color: var(--accent); }
+  .project-card .p-title .arrow { color: var(--accent); font-size: 14px; }
+  .project-card .p-desc { font-size: 14.5px; color: var(--text-dim); }
+  .project-card .p-tag { display: inline-block; font-family: var(--mono); font-size: 11px; color: var(--accent); background: var(--accent-soft); padding: 3px 8px; border-radius: 5px; margin-bottom: 10px; }
 
-  /* Belt-and-suspenders: nothing should ever force horizontal scroll on the page itself */
-  html, body { max-width: 100%; overflow-x: hidden; }
-  img, pre, code { max-width: 100%; }
+  /* Skills */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+  .skill-row .cat { font-family: var(--mono); font-size: 11.5px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 5px; }
+  .skill-row { font-size: 14.5px; }
 
-  /* Fallback: if CSS grid is unsupported, panels still stack top-to-bottom in source order — no JS required for content to render at all. */
+  /* Cert + build note combined row */
+  .lower-row { display: grid; grid-template-columns: 1fr 2fr; gap: 32px; }
+  .cert-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px; }
+  .cert-badge { font-family: var(--mono); font-size: 22px; font-weight: 800; color: var(--accent); }
+  .cert-name { font-size: 13.5px; color: var(--text-dim); margin-top: 4px; }
+  .build-note p { font-size: 14.5px; color: var(--text-dim); margin: 0 0 10px 0; }
+  .build-note p:last-child { margin-bottom: 0; }
+  .build-note code { font-family: var(--mono); background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; color: var(--accent); font-size: 13px; }
+
+  footer { border-top: 1.5px solid var(--text); padding: 26px 0; text-align: center; color: var(--text-dim); font-size: 13px; font-family: var(--mono); }
+
+  @media (max-width: 760px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 28px; padding: 8px 0 40px 0; }
+    .hero-photo-wrap { order: -1; max-width: 320px; margin: 0 auto; }
+    .hero-text .pitch { max-width: 100%; }
+    .stats-grid { grid-template-columns: 1fr; gap: 26px; }
+    .lower-row { grid-template-columns: 1fr; }
+    .topbar nav { display: none; }
+  }
 </style>
 </head>
 <body>
 
-<header class="hero">
+<div class="topbar">
   <div class="wrap">
-    <div class="hero-top">
-      <div class="brand"><span class="dot">●</span> status: open to work</div>
-    </div>
-    <div class="hero-body">
-      <img class="avatar" src="assets/avatar.jpg" alt="Akku Magziyeva">
-      <div class="hero-text">
-        <h1>Akku Magziyeva</h1>
-        <div class="role">DevOps Engineer · Platform Engineer</div>
-        <p class="pitch">
-          <strong>I turn complex infrastructure into simple, reliable, self-service systems.</strong>
-          DevOps/Platform engineer with 5 years across AWS and Kubernetes — built and owned Terraform infrastructure a 6-engineer platform team depends on, from self-service provisioning to a CI gate that catches breaking changes before they ship. Runs every infrastructure change through Claude Code end to end, plan to validation.
-        </p>
-        <div class="cta-row">
-          <a class="cta primary" href="assets/Akku_Magziyeva_Resume.pdf">Résumé (PDF)</a>
-          <a class="cta" href="https://linkedin.com/in/akku-magziyeva">LinkedIn</a>
-          <a class="cta" href="https://github.com/Akkumag">GitHub</a>
-          <a class="cta" href="mailto:akku_rafael@icloud.com">Contact</a>
-        </div>
+    <span class="status-pill"><span class="dot"></span> open to work</span>
+    <nav>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#build-note">How this was built</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <h1>Hi, I'm Akku.</h1>
+      <div class="role">DevOps Engineer · Platform Engineer</div>
+      <p class="pitch">I build infrastructure that just works — so teams don't have to think about it. I write Terraform, run Kubernetes, and use Claude Code to check every change before it ships.</p>
+      <div class="cta-row">
+        <a class="cta primary" href="assets/Akku_Magziyeva_Resume.pdf">Résumé (PDF)</a>
+        <a class="cta" href="https://linkedin.com/in/akku-magziyeva">LinkedIn</a>
+        <a class="cta" href="https://github.com/Akkumag/akkumag.github.io">GitHub</a>
+        <a class="cta" href="mailto:akku_rafael@icloud.com">Contact</a>
       </div>
+    </div>
+    <div class="hero-photo-wrap">
+      <img src="assets/portrait.jpg" alt="Akku Magziyeva">
     </div>
   </div>
 </header>
 
+<div class="marquee-section" aria-hidden="true">
+  <div class="marquee-track">
+    <span>AWS</span><span>Kubernetes</span><span>Terraform</span><span>Claude Code</span><span>GitHub Actions</span><span>Docker</span><span>Kafka</span><span>RabbitMQ</span><span>Prometheus</span><span>Grafana</span><span>CKAD</span>
+    <span>AWS</span><span>Kubernetes</span><span>Terraform</span><span>Claude Code</span><span>GitHub Actions</span><span>Docker</span><span>Kafka</span><span>RabbitMQ</span><span>Prometheus</span><span>Grafana</span><span>CKAD</span>
+  </div>
+</div>
+
 <main class="wrap">
-  <p class="grid-label">// mission control</p>
-  <div class="dashboard">
 
-    <section class="panel panel-metrics">
-      <h2>Impact metrics</h2>
-      <div class="metric-row">
-        <div class="metric">
-          <div class="num">weeks → days</div>
-          <div class="label">data-onboarding setup time</div>
-          <div class="foot">Before: manual Kafka connector/stream-processor/S3/schema setup, coordinated with the data team. After: a single PR through the self-service tooling.</div>
-        </div>
-        <div class="metric">
-          <div class="num">~15 min</div>
-          <div class="label">to clear a production traffic-burst bottleneck</div>
-          <div class="foot">Diagnosed a cluster-autoscaler bottleneck during a traffic burst at GumGum, fixed it with a senior engineer, and brought latency back to normal.</div>
-        </div>
+  <section class="stats-section">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="num">5</div>
+        <div class="label">years across AWS &amp; Kubernetes</div>
       </div>
-    </section>
+      <div class="stat">
+        <div class="num">6</div>
+        <div class="label">engineers on the platform team I build tooling for</div>
+      </div>
+      <div class="stat">
+        <div class="num"><a href="#hellofresh-tooling">2</a></div>
+        <div class="label">permission drifts caught by a CI gate I built, before merge</div>
+      </div>
+    </div>
+  </section>
 
-    <section class="panel panel-exp">
-      <h2>Experience</h2>
-      <div class="role-item">
-        <div class="r-title">Platform Engineer</div>
-        <div class="r-meta">HelloFresh via Loopin · Remote · Nov 2023 — Present</div>
-        <div class="r-meta">Foundations — 6-engineer internal data-platform team</div>
-        <ul>
-          <li>Built self-service Terraform/CLI tooling for HelloFresh's internal data platform — cut data onboarding from weeks of manual Kafka/S3/schema setup to same-day.</li>
-          <li>Built a CI gate that diffs IAM policy across Terraform module versions — has caught 2 permission drifts before merge since a version bump silently broke a team's onboarding (patched same-day).</li>
-          <li>Runs the Kubernetes/Docker infrastructure behind the platform's Kafka and RabbitMQ messaging layer, as part of the shift from a monolithic data platform to data mesh.</li>
-          <li>Uses Claude Code end to end for Terraform/Kubernetes changes — plans, implements, diff-reviews, and validates against <code>terraform plan</code> before anything ships, catching real agent mistakes along the way.</li>
-          <li>Works directly with data analysts and scientists to turn their platform requirements into shipped infrastructure, balancing self-service speed with data-privacy and security compliance.</li>
-        </ul>
-      </div>
-      <div class="role-item">
-        <div class="r-title">Platform Engineer</div>
-        <div class="r-meta">GumGum via Loopin — AI-powered contextual ad-tech · Remote · Sep 2021 — Oct 2023</div>
-        <ul>
-          <li>Contributed to a reusable Terraform EKS module — configurable node-group and IAM resources/variables — improved repeatability of cluster provisioning across environments.</li>
-          <li>Diagnosed a cluster-autoscaler bottleneck during a traffic burst — pods queued because node-group scaling limits were too conservative — raised the node group's minimum size and loosened the autoscaler's cooldown, clearing the backlog and restoring normal latency within ~15 minutes.</li>
-          <li>Worked hands-on with AWS, Kubernetes/EKS, Docker, and Terraform on a cloud-native platform team.</li>
-        </ul>
-      </div>
-    </section>
+  <section class="block" id="experience">
+    <h2>Experience</h2>
+    <div class="role-item">
+      <div class="r-title">Platform Engineer</div>
+      <div class="r-meta">HelloFresh via Loopin · Remote · Nov 2023 — Present</div>
+      <div class="r-meta">Foundations — 6-engineer internal data-platform team</div>
+      <ul>
+        <li>Built self-service Terraform/CLI tooling for HelloFresh's internal data platform — cut data onboarding from weeks of manual Kafka/S3/schema setup to same-day.</li>
+        <li>Built a CI gate that diffs IAM policy across Terraform module versions — has caught 2 permission drifts before merge since a version bump silently broke a team's onboarding (patched same-day).</li>
+        <li>Runs the Kubernetes/Docker infrastructure behind the platform's Kafka and RabbitMQ messaging layer, as part of the shift from a monolithic data platform to data mesh.</li>
+        <li>Uses Claude Code end to end for Terraform/Kubernetes changes — plans, implements, diff-reviews, and validates against <code>terraform plan</code> before anything ships, catching real agent mistakes along the way.</li>
+        <li>Works directly with data analysts and scientists to turn their platform requirements into shipped infrastructure, balancing self-service speed with data-privacy and security compliance.</li>
+      </ul>
+    </div>
+    <div class="role-item">
+      <div class="r-title">Platform Engineer</div>
+      <div class="r-meta">GumGum via Loopin — AI-powered contextual ad-tech · Remote · Sep 2021 — Oct 2023</div>
+      <ul>
+        <li>Contributed to a reusable Terraform EKS module — configurable node-group and IAM resources/variables — improved repeatability of cluster provisioning across environments.</li>
+        <li>Diagnosed a cluster-autoscaler bottleneck during a traffic burst — pods queued because node-group scaling limits were too conservative — raised the node group's minimum size and loosened the autoscaler's cooldown, clearing the backlog and restoring normal latency within ~15 minutes.</li>
+        <li>Worked hands-on with AWS, Kubernetes/EKS, Docker, and Terraform on a cloud-native platform team.</li>
+      </ul>
+    </div>
+  </section>
 
-    <section class="panel panel-skills">
-      <h2>Skills</h2>
+  <section class="block" id="projects">
+    <h2>Projects</h2>
+    <div class="project-grid">
+      <div class="project-card" id="hellofresh-tooling">
+        <div class="p-tag">HelloFresh · work</div>
+        <div class="p-title">Self-service data platform tooling</div>
+        <div class="p-desc">The Terraform module and CLI behind HelloFresh's internal data platform — abstracts Terraform, IAM, and permissions so developer teams provision infrastructure themselves. A version bump I shipped once silently changed a default IAM permission and broke another team's onboarding PR; I found it by diffing module versions and reproducing the failure in a scratch environment, patched it same-day, and added a CI gate that diffs IAM policy output between versions — it's caught two similar drifts since.</div>
+      </div>
+      <div class="project-card">
+        <div class="p-tag">personal · finished</div>
+        <div class="p-title"><a href="https://github.com/Akkumag/task-api-eks-gitops" target="_blank" rel="noopener">EKS + GitOps + Monitoring <span class="arrow">↗</span></a></div>
+        <div class="p-desc">A Task API deployed to a real EKS cluster via ArgoCD, with Prometheus/Grafana monitoring — built to get hands-on with standalone cluster administration and GitOps, beyond the platform-tooling work above. Real architecture decisions and tradeoffs, deployed and verified live, then torn down.</div>
+      </div>
+      <div class="project-card">
+        <div class="p-tag">personal · finished</div>
+        <div class="p-title"><a href="https://github.com/312school/serverless-memo-25c-redhat/pull/2" target="_blank" rel="noopener">Serverless Memo App <span class="arrow">↗</span></a></div>
+        <div class="p-desc">A serverless notes app built solo end to end — Cognito, API Gateway, Lambda, DynamoDB, CloudFront — provisioned with Terraform and deployed through a GitHub Actions pipeline using OIDC (no long-lived AWS keys). Authorization is enforced at API Gateway, before compute ever runs.</div>
+      </div>
+      <div class="project-card">
+        <div class="p-tag">personal · in progress</div>
+        <div class="p-title">AI PR Review Agent</div>
+        <div class="p-desc">Building a GitHub Actions-triggered automation pipeline that runs on every pull request, containerized with Docker and deployed on AWS. The review logic is in Python, integrating an LLM API for automated code-quality and infrastructure feedback with configurable rules per repo. Still in progress — no production users or metrics to claim yet.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="skills">
+    <h2>Skills</h2>
+    <div class="skills-grid">
       <div class="skill-row"><span class="cat">Cloud &amp; Infra</span>AWS (IAM, EC2, VPC, S3, EKS), Linux, Docker, Kubernetes</div>
       <div class="skill-row"><span class="cat">IaC &amp; Automation</span>Terraform, GitHub Actions</div>
       <div class="skill-row"><span class="cat">Messaging</span>Kafka, RabbitMQ</div>
@@ -259,37 +313,23 @@
       <div class="skill-row"><span class="cat">Observability</span>CloudWatch, Prometheus, Grafana</div>
       <div class="skill-row"><span class="cat">AI/Agentic</span>Claude Code (daily driver), internal AI PR-review tooling, plan-mode workflows, diff review discipline, context engineering (CLAUDE.md)</div>
       <div class="skill-row"><span class="cat">Scripting</span>Bash, Python</div>
-    </section>
+    </div>
+  </section>
 
-    <section class="panel panel-projects">
-      <h2>Projects</h2>
-      <div class="project-item">
-        <div class="p-title">AI PR Review Agent — In Progress</div>
-        <div class="p-desc">Building a GitHub Actions-triggered automation pipeline that runs on every pull request, containerized with Docker and deployed on AWS. The review logic is in Python, integrating an LLM API for automated code-quality and infrastructure feedback with configurable rules per repo. Still in progress — no production users or metrics to claim yet.</div>
+  <section class="block" id="build-note">
+    <h2>Certification &amp; how this site was built</h2>
+    <div class="lower-row">
+      <div class="cert-card">
+        <div class="cert-badge">CKAD</div>
+        <div class="cert-name">Certified Kubernetes Application Developer</div>
       </div>
-      <div class="project-item">
-        <div class="p-title">Serverless Memo App</div>
-        <div class="p-desc">A serverless notes app built solo end to end — Cognito, API Gateway, Lambda, DynamoDB, CloudFront — provisioned with Terraform and deployed through a GitHub Actions pipeline using OIDC (no long-lived AWS keys). Authorization is enforced at API Gateway, before compute ever runs.</div>
+      <div class="build-note">
+        <p>Built with Claude Code, using the same workflow described in Experience: I set the plan (structure, content, style direction) and reviewed it before anything was written; the page was implemented against that plan; I reviewed the actual diff and the rendered result before treating anything as done.</p>
+        <p>Deliberately simple: plain HTML/CSS, no build step, no JavaScript required for content — the marquee is a pure-CSS animation that degrades to a static wrapped list under <code>prefers-reduced-motion</code>. Hosted on <code>GitHub Pages</code>, source at <a href="https://github.com/Akkumag/akkumag.github.io" target="_blank" rel="noopener">github.com/Akkumag/akkumag.github.io</a>.</p>
       </div>
-      <div class="project-item">
-        <div class="p-title">Self-service data platform tooling (HelloFresh)</div>
-        <div class="p-desc">The Terraform module and CLI behind HelloFresh's internal data platform — abstracts Terraform, IAM, and permissions so developer teams provision infrastructure themselves. A version bump I shipped once silently changed a default IAM permission and broke another team's onboarding PR; I found it by diffing module versions and reproducing the failure in a scratch environment, patched it same-day, and added a CI gate that diffs IAM policy output between versions — it's caught two similar drifts since.</div>
-      </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="panel panel-cert">
-      <h2>Certification</h2>
-      <div class="cert-badge">CKAD</div>
-      <div class="cert-name">Certified Kubernetes Application Developer</div>
-    </section>
-
-    <section class="panel panel-build">
-      <h2>How this site was built</h2>
-      <p>Built with Claude Code, using the same workflow described in the Experience panel: I set the plan (structure, content, style direction) and reviewed it before anything was written; the page was implemented against that plan; I reviewed the actual diff and the rendered result before treating anything as done.</p>
-      <p>Deliberately simple: plain HTML/CSS, no build step, no JavaScript dependency for content — the dashboard panels render directly from HTML, so there's no "script failed to load" failure mode. Hosted on <code>GitHub Pages</code>, source at <a href="https://github.com/Akkumag/akkumag.github.io">github.com/Akkumag/akkumag.github.io</a>.</p>
-    </section>
-
-  </div>
 </main>
 
 <footer>
