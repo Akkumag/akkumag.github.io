@@ -280,7 +280,7 @@
         <li>Built self-service Terraform/CLI tooling for HelloFresh's internal data platform — cut data onboarding from weeks of manual Kafka/S3/schema setup to same-day.</li>
         <li>Built a CI gate that diffs IAM policy across Terraform module versions — has caught 2 permission drifts before merge since a version bump silently broke a team's onboarding (patched same-day).</li>
         <li>Runs the Kubernetes/Docker infrastructure behind the platform's Kafka and RabbitMQ messaging layer, as part of the shift from a monolithic data platform to data mesh.</li>
-        <li>Uses Claude Code end to end for Terraform/Kubernetes changes — plans, implements, diff-reviews, and validates against <code>terraform plan</code> before anything ships, catching real agent mistakes along the way.</li>
+        <li>Runs Claude Code end to end for Terraform/Kubernetes changes: plan, implement, diff-review, validate.</li>
         <li>Works directly with data analysts and scientists to turn their platform requirements into shipped infrastructure, balancing self-service speed with data-privacy and security compliance.</li>
       </ul>
     </div>
@@ -288,8 +288,8 @@
       <div class="r-title">Platform Engineer</div>
       <div class="r-meta">GumGum via Loopin — AI-powered contextual ad-tech · Remote · Sep 2021 — Oct 2023</div>
       <ul>
-        <li>Contributed to a reusable Terraform EKS module — configurable node-group and IAM resources/variables — improved repeatability of cluster provisioning across environments.</li>
-        <li>Diagnosed a cluster-autoscaler bottleneck during a traffic burst — pods queued because node-group scaling limits were too conservative — raised the node group's minimum size and loosened the autoscaler's cooldown, clearing the backlog and restoring normal latency within ~15 minutes.</li>
+        <li>Extended a shared Terraform EKS module with configurable node-group and IAM resources — used to provision clusters repeatably across environments.</li>
+        <li>Diagnosed and resolved a cluster-autoscaler bottleneck during a traffic burst — raised node-group minimums and loosened scale-up cooldown, clearing the pod backlog and restoring normal latency within ~15 minutes.</li>
         <li>Worked hands-on with AWS, Kubernetes/EKS, Docker, and Terraform on a cloud-native platform team.</li>
       </ul>
     </div>
